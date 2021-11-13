@@ -1,6 +1,7 @@
 <?php
 
-final class SclerodeoBlogPostPageTemplate {
+final class
+SclerodeoBlogPostPageTemplate {
 
     /* -- CBInstall interfaces -- -- -- -- -- */
 
@@ -33,15 +34,21 @@ final class SclerodeoBlogPostPageTemplate {
     /**
      * @return object
      */
-    static function CBModelTemplate_spec(): stdClass {
-        return (object)[
-            'className' => 'CBViewPage',
-            'classNameForKind' => 'SclerodeoBlogPostPageKind',
-            'classNameForSettings' => 'SclerodeoPageSettings',
-            'frameClassName' => 'SclerodeoPageFrame',
-            'selectedMainMenuItemName' => 'blog',
-            'sections' => CBDefaults_BlogPost::viewSpecs(),
-        ];
+    static function
+    CBModelTemplate_spec(
+    ): stdClass {
+        $pageSpec = CBViewPage::standardPageTemplate();
+
+        CBModel::merge(
+            $pageSpec,
+            (object)[
+                'classNameForKind' => 'SclerodeoBlogPostPageKind',
+                'selectedMainMenuItemName' => 'blog',
+                'sections' => CBDefaults_BlogPost::viewSpecs(),
+            ]
+        );
+
+        return $pageSpec;
     }
     /* CBModelTemplate_spec() */
 
