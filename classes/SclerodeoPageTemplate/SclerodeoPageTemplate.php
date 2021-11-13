@@ -1,6 +1,7 @@
 <?php
 
-final class SclerodeoPageTemplate {
+final class
+SclerodeoPageTemplate {
 
     /**
      * @return void
@@ -17,27 +18,38 @@ final class SclerodeoPageTemplate {
         return ['CBModelTemplateCatalog'];
     }
 
+
+
     /**
-     * @return model
+     * @return object
      */
-    static function CBModelTemplate_spec(): stdClass {
-        return (object)[
-            'className' => 'CBViewPage',
-            'classNameForSettings' => 'SclerodeoPageSettings',
-            'frameClassName' => 'SclerodeoPageFrame',
-            'sections' => [
-                (object)[
-                    'className' => 'CBPageTitleAndDescriptionView',
+    static function
+    CBModelTemplate_spec(
+    ): stdClass {
+        $pageSpec = CBViewPage::standardPageTemplate();
+
+        CBModel::merge(
+            $pageSpec,
+            (object)[
+                'sections' => [
+                    (object)[
+                        'className' => 'CBPageTitleAndDescriptionView',
+                    ],
+                    (object)[
+                        'className' => 'CBArtworkView',
+                    ],
+                    (object)[
+                        'className' => 'CBMessageView',
+                    ],
                 ],
-                (object)[
-                    'className' => 'CBArtworkView',
-                ],
-                (object)[
-                    'className' => 'CBMessageView',
-                ],
-            ],
-        ];
+            ]
+        );
+
+        return $pageSpec;
     }
+    /* CBModelTemplate_spec() */
+
+
 
     /**
      * @return string
